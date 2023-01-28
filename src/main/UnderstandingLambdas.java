@@ -1,5 +1,6 @@
 package main;
 
+import controller.ElectricityConsumer;
 import controller.Switcher;
 import entity.Lamp;
 import entity.Radio;
@@ -14,15 +15,25 @@ public class UnderstandingLambdas {
 		TVSet tvSet = new TVSet();
 		
 		//Event Subscribe
-//		switcher.setConsumer(lamp); при данной архитектуре программы добавлять к электрической сети 
-								//  потребителя можно только одного
-								//  с целью избежать такую функциональную недостаточность создается 
-								//  список ссылок типа интерфейса на 
-								//  объекты потребителей в классе-контроллере 
+//		switcher.setConsumer(lamp); //with this architecture of the program, only one consumer can be added to the electrical network 
+									//in order to avoid such functional insufficiency
+									//we created list of interface type references containing links to
+									//consumer objects in the controller [Switcher] class
+									
 		
 		switcher.addElectricityConsumer(lamp);
 		switcher.addElectricityConsumer(radio);
 		switcher.addElectricityConsumer(tvSet);
+		
+		class Fire implements ElectricityConsumer{
+			public void electricityOn() {
+				System.out.println("--** Fire Alarm **--");
+			}
+		}
+		
+		//It is irrational to create an entire class just to call a given message
+		
+		switcher.addElectricityConsumer(new Fire());
 		
 		switcher.switchOn();
 	
