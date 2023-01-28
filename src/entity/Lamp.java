@@ -1,6 +1,8 @@
 package entity;
 
-public class Lamp {
+import controller.ElectricityConsumer;
+
+public class Lamp implements ElectricityConsumer{
 		
 	
 	public void lightOn(){
@@ -9,6 +11,11 @@ public class Lamp {
 	
 	public void lightOff(){
 		System.out.println("Lamp is: OFF");
+	}
+
+	
+	public void electricityOn() {
+		this.lightOn();
 	}
 	
 }
